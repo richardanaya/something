@@ -1,0 +1,67 @@
+This is a virtual world project of many components
+
+Virtual World Space
+- cryptography is identity - if you own the domain, your public keys are valid for verification
+- "Server" is mostly pointing toward static data and connecting authorized peers to communicate with client peers
+- "Server" is a peer who has an authorized signature to write commands out to other peers
+- "Clients" peer is expression what his avatar objects to the world around them, which can be optionally listened to
+- "Server" tells clients who else to listen to, server could act as router or aggregators of client data if too many
+- connections are verified
+- Location configuration on http tells me what webrtc client I should go to to get started and a way to verify their responsabilities
+- location based ( non-continual world )
+- custom material nodes per object
+- animation state per object
+- physics of objects are controlled by owner
+- scripts are run by owner
+- encrypted checksum with increasing message count id ( keep sane security "enough to keep honest people honest")
+- every resource is downloaded by cors (resource providers can have their own content)
+- communication is mostly concerned about updated position, animation state, material states), cross object communication
+- all visible changes are transitions over time, and cancelable by other transitions
+- need to have management over who is bogging down our experience, who can communicate with our objects
+- "who should I connect with"?
+
+Interface
+- Extendable UI Framework
+- Seperation of UI and virtual world
+- material design
+- tablet friendly
+- vr friendly
+
+Tools
+- 3D Modeling App
+- Node editor
+- Upload into space
+- Sync into space at origin
+- Bridge through a client
+
+Expression
+- creating modifications of static items you control
+- positioning unrigged items on skeleton
+- let standards evolve themselves for avatar ( open source preferred )
+- Open Source Body
+- The base avatar mesh
+- animations, etc.
+- opens source clothing
+- Add to inventory by link
+- Inventory management
+
+Communication
+- Spacial Communication Overlay
+- Identity is cryptography
+- secure chat overlay
+- profiles
+- chat by location
+- voice video
+- UI
+
+Economy
+Assume everything can easily be stolen
+- Players control what information they expose an to who
+- Tools for managing people based off unique signature
+- White lists and black lists
+- Bitcoin patronage:
+    - wallet
+    - tip bitcoin
+    - subscribe monthly for access
+    - coinbase
+- UI handler
