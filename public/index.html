@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="app.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="lib/xirsys.core.js"></script>
+        <script src="lib/xirsys.api.js"></script>
+        <script src="lib/xirsys.simplewebrtc.js"></script>
+        <script src="lib/simplewebrtc.bundle.js"></script>
+        <script src="lib/key.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.js"></script>
+    </head>
+    <body>
+        <script>
+            var webrtc = new $xirsys.simplewebrtc(); //add secure server stuff here?
+            webrtc.connect({},
+                {
+                    // we don't do video
+                    localVideoEl: '',
+                    remoteVideosEl: '',
+                    // dont ask for camera access
+                    autoRequestMedia: false,
+                    // dont negotiate media
+                    receiveMedia: {
+                        mandatory: {
+                            OfferToReceiveAudio: false,
+                            OfferToReceiveVideo: false
+                        }
+                    }
+                }
+            );
+
+            var room = "default"
+            $.get("/token", function(token) {
+                webrtc.joinRoom(room,token);
+            })
+            .error(function(xhr) {
+                console.error(xhr);
+            })
+
+            webrtc.on('createdPeer', function (peer) {
+
+            });
+
+            webrtc.on("channelMessage", function(peer, channel, data) {
+                processMessage(data.type, data.payload)
+            });
+
+           function distributeMessage(type,message){
+             processMessage(type,message)
+             webrtc.ref.sendDirectlyToAll("",type,message)
+           }
+
+          function processMessage(type,message){
+             mesh.position.x += parseFloat(message.split(",")[0]);
+          }
+
+			var camera, scene, renderer;
+			var mesh;
+
+			init();
+			animate();
+
+			function init() {
+        var screen_width = 600;
+        var screen_height = 400;
+				camera = new THREE.PerspectiveCamera( 70, screen_width / screen_height, 1, 1000 );
+				camera.position.z = 400;
+
+				scene = new THREE.Scene();
+
+        THREE.ImageUtils.crossOrigin = '';
+				var texture = THREE.ImageUtils.loadTexture('http://i.imgur.com/3tU4Vig.jpg');
+
+				var geometry = new THREE.BoxGeometry( 200, 200, 200 );
+				var material = new THREE.MeshBasicMaterial( { map: texture } );
+
+				mesh = new THREE.Mesh( geometry, material );
+				scene.add( mesh );
+
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( screen_width, screen_height );
+				document.body.appendChild( renderer.domElement );
+
+			}
+
+			function animate() {
+        if(Key.isDown(Key.RIGHT_ARROW)){
+          distributeMessage("chat", "1,0,0");
+        }
+        if(Key.isDown(Key.LEFT_ARROW)){
+          distributeMessage("chat", "-1,0,0");
+        }
+				requestAnimationFrame( animate );
+
+				mesh.rotation.x += 0.005;
+				mesh.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+    </body>
+</html>
