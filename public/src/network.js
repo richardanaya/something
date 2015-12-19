@@ -4,11 +4,29 @@ var Network = function(worldURL){
   this.peers = [];
 }
 
+Network.prototype.sendMessageToAll = function(type,message){
+   this.processMessage(null,type,message)
+   this.webrtc.ref.sendDirectlyToAll("",type,message)
+}
+
+Network.prototype.processMessage = function(peer,type,message){
+  mesh.position.x += parseFloat(message.split(",")[0]);
+}
+
+Network.prototype.onConnected = function(peer){
+
+}
+
+Network.prototype.onPeerAdded = function(peer){
+  this.peers.push(peer);
+}
+
 Network.prototype.join = function(){
   var _this = this;
   $.getJSON(this.worldURL, function(world) {
     _this.owner = KEYUTIL.getKey(world.owner);
     var webrtc = new $xirsys.simplewebrtc(); //add secure server stuff here?
+    _this.webrtc = webrtc;
     webrtc.connect({},
         {
             // we don't do video
@@ -34,21 +52,10 @@ Network.prototype.join = function(){
         console.error(xhr);
     })
 
-    webrtc.on('createdPeer', function (peer) {
-      _this.peers.push(peer);
-    });
+    webrtc.on('joinedRoom', _this.onConnected.bind(_this));
 
-    webrtc.on("channelMessage", function(peer, channel, data) {
-        processMessage(data.type, data.payload)
-    });
+    webrtc.on('createdPeer', _this.onPeerAdded.bind(_this));
 
-    function distributeMessage(type,message){
-     processMessage(type,message)
-     webrtc.ref.sendDirectlyToAll("",type,message)
-    }
-
-    function processMessage(type,message){
-     mesh.position.x += parseFloat(message.split(",")[0]);
-    }
+    webrtc.on("channelMessage", _this.processMessage.bind(_this) );
   })
 }

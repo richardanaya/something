@@ -43,10 +43,10 @@ document.body.appendChild( renderer.domElement );
 
 function animate() {
 if(Key.isDown(Key.RIGHT_ARROW)){
-distributeMessage("chat", "1,0,0");
+  network.sendMessageToAll("chat", "1,0,0");
 }
 if(Key.isDown(Key.LEFT_ARROW)){
-distributeMessage("chat", "-1,0,0");
+  network.sendMessageToAll("chat", "-1,0,0");
 }
 requestAnimationFrame( animate );
 

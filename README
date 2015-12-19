@@ -1,5 +1,20 @@
 This is a virtual world project of many components
 
+#Network
+
+What's needed to start a world:
+
+/world.json
+Defines who is the public key we should verify and then pay attention to get the world started. This needs to be CORS accessible.
+
+/token
+A webrtc connection token we can use to get webrtc going. This needs to be CORS accessible.
+
+Images/Models
+Resource URLs which might be referenced by peers to go retrieve. This needs to be CORS accessible.
+
+
+#Notes
 Virtual World Space
 - cryptography is identity - if you own the domain, your public keys are valid for verification
 - "Server" is mostly pointing toward static data and connecting authorized peers to communicate with client peers
