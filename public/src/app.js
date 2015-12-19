@@ -1,13 +1,3 @@
-var name = "Richard"
-
-var sigalg = "SHA1withRSA";
-
-var sMsg = "abc";
-var ident = Identity.hasCurrentIdentity()?Identity.getCurrentIdentity():Identity.generateCurrentIdentity();
-var signature = ident.createSignature(sMsg)
-var isValid = ident.verifySignature(sMsg,signature)
-var finalMsg = ident.decrypt(ident.encrypt("hey"))
-
 var network = new Network("http://shvdow.herokuapp.com/world.json");
 network.join();
 

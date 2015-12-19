@@ -22,6 +22,7 @@ Network.prototype.onPeerAdded = function(peer){
 }
 
 Network.prototype.join = function(){
+  Identity.hasCurrentIdentity()?Identity.getCurrentIdentity():Identity.generateCurrentIdentity();
   var _this = this;
   $.getJSON(this.worldURL, function(world) {
     _this.owner = KEYUTIL.getKey(world.owner);
