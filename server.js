@@ -45,6 +45,7 @@ server.get('/token', function (req, res) {
     }
   },function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
 	    res.send(body.d.token);
 	  }
 	});
