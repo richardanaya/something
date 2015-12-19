@@ -23,7 +23,7 @@ server.get('/world.json', function(req,res){
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(JSON.stringify({
     "owner": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyXkBJWKEVxxn5Iyr3kJF\nwCwLTRqDllvSdgAVnvDHbLDxGJWvX5ApPOdzACR8fqwawQirVv6/IEGhy/M06f85\nG24iU3/o1cO8rNEn0GUjIHTajGZ412ZTrvXBUzBZMD+c/nHxBWaAuQih6hrETfqU\nXRlCy2YK6dI4urtFzJnz3jh9g8FpQ8jMjWzKxn4BgWnUNNy9IVJwGws1yX0ra91X\nLjjRM7gorR9fpJNB0ySJuLv9S35ANRgLADgbBv0CUIfFPceiob7dx/ihKvE4U3tX\nJ7efTjjgVJup+AV+228oYF8DQ6hQ+X87n1red7GbMreBqbGxNX4M3nn/gjaYDXtE\nJwIDAQAB\n-----END PUBLIC KEY-----",
-    "tokenURL": "/token",
+    "tokenURL": "http://shvdow.herokuapp.com/token",
     "room": "default"
   }));
 })

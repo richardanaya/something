@@ -8,7 +8,7 @@ var signature = ident.createSignature(sMsg)
 var isValid = ident.verifySignature(sMsg,signature)
 var finalMsg = ident.decrypt(ident.encrypt("hey"))
 
-var network = new Network("/world.json");
+var network = new Network("http://shvdow.herokuapp.com/world.json");
 network.join();
 
 var camera, scene, renderer;
