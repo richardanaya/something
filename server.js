@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+require('dotenv').load();
 
 var configureServer = function() {
     var server = express.createServer(    );

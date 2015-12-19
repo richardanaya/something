@@ -1,9 +1,10 @@
 {
-	"name":"xirsys-chat-nodejs-heroku",
+	"name":"shvdow",
 	"version":"0.0.1",
 	"dependencies":{
 		"express":"2.5.x",
-		"request":"latest"
+		"request":"latest",
+		"dotenv":"latest"
 	},
 	"scripts":{
 		"start":"server.js"
