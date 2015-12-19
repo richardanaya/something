@@ -39,3 +39,14 @@ Identity.prototype.encrypt = function(message){
 Identity.prototype.decrypt = function(encryptedMessage){
   return this.private.decrypt(encryptedMessage);
 }
+
+Identity.sameKey = function(keyA,keyB){
+  if(keyA.isPublic!=keyB.isPublic){return false}
+  if(keyA.n.length!=keyB.n.length){return false}
+  for(var i = 0 ; i < keyA.n.length; i++){
+    if(keyA.n[i]!=keyB.n){
+      return false;
+    }
+  }
+  return true;
+}
